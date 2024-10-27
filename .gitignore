@@ -175,3 +175,7 @@ test
 .editorconfig
 .prettierrc
 package-lock.json
+
+# macOS DS store
+
+**/.DS_Store
