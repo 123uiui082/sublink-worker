@@ -110,24 +110,24 @@ async function handleRequest(request) {
         headers: { 'Content-Type': 'application/json' }
       });
 
-    } else if (url.pathname === '/shorten-v2'){
+    } else if (url.pathname === '/shorten-v2') {
       const originalUrl = url.searchParams.get('url');
       let shortCode = url.searchParams.get('shortCode');
 
       if (!originalUrl) {
         return new Response('Missing URL parameter', { status: 400 });
       }
-      
+
       // 创建一个 URL 对象来正确解析原始 URL
       const parsedUrl = new URL(originalUrl);
       const queryString = parsedUrl.search;
-      
+
       if (!shortCode) {
         shortCode = GenerateWebPath();
       }
 
       await SUBLINK_KV.put(shortCode, queryString);
-      
+
       return new Response(shortCode, {
         headers: { 'Content-Type': 'text/plain' }
       });
